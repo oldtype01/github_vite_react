@@ -37,6 +37,16 @@ function MainLayout() {
             홈
           </NavLink>
           <NavLink
+            to="/timer"
+            className={({ isActive }) =>
+              isActive
+                ? 'font-semibold text-indigo-600 dark:text-indigo-400'
+                : 'text-gray-500 hover:text-indigo-500 transition-colors'
+            }
+          >
+            타이머
+          </NavLink>
+          <NavLink
             to="/about"
             className={({ isActive }) =>
               isActive
