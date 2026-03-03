@@ -1,14 +1,21 @@
-import useTimerStore from '../store/useTimerStore'
+import { useEffect } from "react";
+import useTimerStore from "../store/useTimerStore";
 
 function formatTime(ms) {
-  const minutes = String(Math.floor(ms / 60000)).padStart(2, '0')
-  const seconds = String(Math.floor((ms % 60000) / 1000)).padStart(2, '0')
-  const centiseconds = String(Math.floor((ms % 1000) / 10)).padStart(2, '0')
-  return `${minutes}:${seconds}.${centiseconds}`
+  const minutes = String(Math.floor(ms / 60000)).padStart(2, "0");
+  const seconds = String(Math.floor((ms % 60000) / 1000)).padStart(2, "0");
+  const centiseconds = String(Math.floor((ms % 1000) / 10)).padStart(2, "0");
+  return `${minutes}:${seconds}.${centiseconds}`;
 }
 
 function Timer() {
-  const { elapsed, running, start, stop, reset } = useTimerStore()
+  const { elapsed, running, start, stop, reset } = useTimerStore();
+
+  useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, [stop]);
 
   return (
     <div className="text-center">
@@ -31,7 +38,7 @@ function Timer() {
               onClick={start}
               className="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition-colors cursor-pointer"
             >
-              {elapsed > 0 ? '계속' : '시작'}
+              {elapsed > 0 ? "계속" : "시작"}
             </button>
           )}
           <button
@@ -43,7 +50,7 @@ function Timer() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Timer
+export default Timer;
